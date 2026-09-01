@@ -1,3 +1,80 @@
-<h1>Livros</h1>
+<div class="cabecalho">
+    <h1>Livros</h1>
 
-<p>Aqui você tem acesso aos livros disponíveis.</p>
+    <button (click)="mostrarFormulario()">+ Novo livro</button>
+</div>
+
+@if (formularioVisivel) {
+    <form (ngSubmit)="cadastrarLivro()">
+        <div>
+            <label for="titulo">Título</label>
+            <input type="text" id="titulo" 
+            name="titulo" [(ngModel)]="novoLivro.titulo">
+        </div>
+
+        <div>
+            <label for="autor">Autor</label>
+            <input type="text" id="autor" 
+            name="autor" [(ngModel)]="novoLivro.autor">
+        </div>
+
+        <div>
+            <label for="genero">Gênero</label>
+            <input type="text" id="genero" 
+            name="genero" [(ngModel)]="novoLivro.genero">
+        </div>
+
+        <div>
+            <label for="ano">Ano</label>
+            <input type="number" id="ano" 
+            name="ano" [(ngModel)]="novoLivro.ano">
+        </div>
+
+        <div>
+            <label for="quantidade">Quantidade</label>
+            <input type="number" id="quantidade" 
+            name="quantidade" [(ngModel)]="novoLivro.quantidade">
+        </div>
+
+        <button type="submit">
+            @if (editandoLivro) {
+                Salvar alterações
+            } @else {
+                Cadastrar
+            }
+        </button>
+
+        <button type="button" (click)="fecharFormulario()">Cancelar</button>
+    </form>
+}
+
+<p>Livros cadastrados:</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Título</th>
+            <th>Autor</th>
+            <th>Gênero</th>
+            <th>Ano</th>
+            <th>Quantidade</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @for (livro of livros; track livro.id) {
+            <tr>
+                <td>{{livro.titulo}}</td>
+                <td>{{livro.autor}}</td>
+                <td>{{livro.genero}}</td>
+                <td>{{livro.ano}}</td>
+                <td>{{livro.quantidade}}</td>
+                <td>
+                    <button (click)="editarLivro(livro)">Editar</button>
+                    <button (click)="excluirLivro(livro.id)">Excluir</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
