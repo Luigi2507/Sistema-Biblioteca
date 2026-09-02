@@ -1,11 +1,56 @@
-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 25px;
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 40px;
+  background-color: #18b4b4;
+  color: rgb(0, 0, 0);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  font-family: cursive;
 }
 
-nav a {
-    margin-left: 20px;
-    text-decoration: none;
+
+/* LOGO */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.icone {
+  font-size: 26px;
+}
+
+
+/* LINKS */
+.links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.links a {
+  padding: 9px 14px;
+  color: #000000;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 500;
+  transition: 0.2s;
+}
+
+
+/* HOVER */
+.links a:hover {
+  color: rgb(255, 255, 255);
+  background-color: #498082;
+}
+
+
+/* PÁGINA ATUAL */
+.links a.ativo {
+  color: rgb(255, 255, 255);
+  background-color: #42c0a2;
 }

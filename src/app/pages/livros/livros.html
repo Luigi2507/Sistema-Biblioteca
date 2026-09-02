@@ -4,6 +4,10 @@
     <button (click)="mostrarFormulario()">+ Novo livro</button>
 </div>
 
+<div class="pesquisa">
+    <input type="text" placeholder="Pesquisar livro..." [(ngModel)]="termoPesquisa">
+</div>
+
 @if (formularioVisivel) {
     <form (ngSubmit)="cadastrarLivro()">
         <div>
@@ -63,7 +67,7 @@
     </thead>
 
     <tbody>
-        @for (livro of livros; track livro.id) {
+        @for (livro of livrosFiltrados(); track livro.id) {
             <tr>
                 <td>{{livro.titulo}}</td>
                 <td>{{livro.autor}}</td>
@@ -71,8 +75,14 @@
                 <td>{{livro.ano}}</td>
                 <td>{{livro.quantidade}}</td>
                 <td>
-                    <button (click)="editarLivro(livro)">Editar</button>
-                    <button (click)="excluirLivro(livro.id)">Excluir</button>
+                    <button class="btn-editar" (click)="editarLivro(livro)">Editar</button>
+                    <button class="btn-excluir" (click)="excluirLivro(livro.id)">Excluir</button>
+                </td>
+            </tr>
+        } @empty {
+            <tr>
+                <td colspan="6" class="nenhum-livro">
+                    Nenhum livro encontrado.
                 </td>
             </tr>
         }

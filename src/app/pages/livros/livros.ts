@@ -111,4 +111,18 @@ export class Livros {
   excluirLivro(id: number) {
     this.livros = this.livros.filter(livro => livro.id !== id);
   }
+
+  //Pesquisa e filtros
+  termoPesquisa = '';
+
+  livrosFiltrados() {
+    const termo = this.termoPesquisa.toLowerCase().trim();
+
+    return this.livros.filter(livro =>
+            livro.titulo.toLowerCase().includes(termo) ||
+            livro.autor.toLowerCase().includes(termo) ||
+            livro.genero.toLowerCase().includes(termo) ||
+            livro.ano.toString().includes(termo)
+    );
+  }
 }

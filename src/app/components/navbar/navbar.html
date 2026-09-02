@@ -1,10 +1,21 @@
-<nav>
-    <h2>📚 Sistema de Biblioteca</h2>
+<nav class="navbar">
+  <div class="logo">
+    <span class="icone">📚</span>
+    <span>Sistema de Biblioteca</span>
+  </div>
 
-    <div>
-        <a routerLink="/">Início</a>
-        <a routerLink="/livros">Livros</a>
-        <a routerLink="/usuarios">Usuários</a>
-        <a routerLink="/emprestimos">Empréstimos</a>
-    </div>
+  <div class="links">
+    <a routerLink="/" routerLinkActive="ativo" [routerLinkActiveOptions]="{ exact: true }">
+      Início
+    </a>
+    <a routerLink="/livros" routerLinkActive="ativo">
+      Livros
+    </a>
+    <a routerLink="/usuarios" routerLinkActive="ativo">
+      Usuários
+    </a>
+    <a routerLink="/emprestimos" routerLinkActive="ativo">
+      Empréstimos
+    </a>
+  </div>
 </nav>
