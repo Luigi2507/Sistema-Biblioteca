@@ -4,6 +4,11 @@
     <button (click)="mostrarFormulario()"> + Novo Usuário</button>
 </div>
 
+<div class="pesquisa">
+    <input type="text" placeholder="Pesquisar usuário..."
+        [(ngModel)]="termoPesquisa">
+</div>
+
 @if (formularioVisivel) {
     <form (ngSubmit)="cadastrarUsuario()">
 
@@ -50,7 +55,7 @@
     </thead>
 
     <tbody>
-        @for (usuario of usuarios; track usuario.id) {
+        @for (usuario of usuariosFiltrados(); track usuario.id) {
             <tr>
                 <td>{{usuario.nome}}</td>
                 <td>{{usuario.email}}</td>
@@ -58,6 +63,12 @@
                 <td>
                     <button class="btn-editar" (click)="editarUsuario(usuario)">Editar</button>
                     <button class="btn-excluir"(click)="excluirUsuario(usuario.id)">Excluir</button>
+                </td>
+            </tr>
+        } @empty {
+            <tr>
+                <td colspan="4" class="nenhum-usuario">
+                    Nenhum usuário encontrado.
                 </td>
             </tr>
         }

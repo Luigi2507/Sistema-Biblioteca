@@ -103,4 +103,17 @@ export class Usuarios {
   excluirUsuario(id: number) {
     this.usuarios = this.usuarios.filter(usuario => usuario.id != id);
   }
+
+  //Pesquisa de usuários
+  termoPesquisa = '';
+
+  usuariosFiltrados() {
+    const termo = this.termoPesquisa.toLowerCase().trim();
+
+    return this.usuarios.filter(usuario =>
+      usuario.nome.toLowerCase().includes(termo) ||
+      usuario.email.toLowerCase().includes(termo) ||
+      usuario.telefone.toLowerCase().includes(termo)
+    );
+  }
 }
