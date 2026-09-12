@@ -1,3 +1,90 @@
-<h1>Empréstimos</h1>
+<div class="cabecalho">
+    <h1>Empréstimos</h1>
 
-<p>Aqui você controla os empréstimos realizados.</p>
+    <button (click)="mostrarFormulario()">+ Novo Empréstimo</button>
+</div>
+
+<div class="pesquisa">
+    <input type="text" placeholder="Pesquisar empréstimo...">
+</div>
+
+@if (formularioVisivel) {
+    <form (ngSubmit)="cadastrarEmprestimo()">
+        <div>
+            <label for="livro">Livro</label>
+            <select id="livro" name="livro" [(ngModel)]="novoEmprestimo.livro">
+                <option value="">Selecione um livro...</option>
+                <option value="1984">1984</option>
+                <option value="O Hobbit">O Hobbit</option>
+                <option value="Cosmos">Cosmos</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="usuario">Usuário</label>
+            <select type="text" id="usuario" name="usuario" [(ngModel)]="novoEmprestimo.usuario">
+                <option value="">Selecione um usuário...</option>
+                <option value="Luigi Favaro">Luigi Favaro</option>
+                <option value="Ana da Silva">Ana da Silva</option>
+                <option value="Carlos Santos">Carlos Santos</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="dataEmprestimo">Data do Empréstimo</label>
+            <input type="date" id="dataEmprestimo" name="dataEmprestimo" [(ngModel)]="novoEmprestimo.dataEmprestimo"
+            disabled="editandoEmprestimo">
+        </div>
+
+        <div>
+            <label for="dataDevolucao">Data da Devolução</label>
+            <input type="date" id="dataDevolucao" name="dataDevolucao" [(ngModel)]="novoEmprestimo.dataDevolucao"
+            disabled="editandoEmprestimo">
+        </div>
+
+        <div>
+            <label for="status">Status</label>
+            <select id="status" name="status" [(ngModel)]="novoEmprestimo.status">
+                <option value="Em andamento">Em andamento</option>
+                <option value="Atrasado">Atrasado</option>
+                <option value="Devolvido">Devolvido</option>
+            </select>
+        </div>
+        <button type="button" (click)="fecharFormulario()">Cancelar</button>
+        <button type="submit">
+            @if (editandoEmprestimo) {
+                Salvar alterações
+            } @else {
+                Cadastrar
+            }
+        </button>
+    </form>
+}
+<p>Lista de empréstimos:</p>
+<table>
+    <thead>
+        <tr>
+            <th>Livro</th>
+            <th>Usuário</th>
+            <th>Data do Empréstimo</th>
+            <th>Data da Devolução</th>
+            <th>Status</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @for (emprestimo of emprestimos; track emprestimo.id) {
+            <tr>
+                <td>{{emprestimo.livro}}</td>
+                <td>{{emprestimo.usuario}}</td>
+                <td>{{emprestimo.dataEmprestimo}}</td>
+                <td>{{emprestimo.dataDevolucao}}</td>
+                <td>{{emprestimo.status}}</td>
+                <td>
+                    <button class="btn-editar" (click)="editarEmprestimo(emprestimo)">Editar</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

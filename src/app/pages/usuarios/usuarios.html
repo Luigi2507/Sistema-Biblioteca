@@ -30,6 +30,8 @@
                 [(ngModel)]="novoUsuario.telefone">
         </div>
 
+        <button type="button" (click)="fecharFormulario()">Cancelar</button>
+        
         <button type="submit">        
             @if (editandoUsuario) {
                 Salvar alterações
@@ -38,7 +40,6 @@
             }
         </button>
 
-        <button type="button" (click)="fecharFormulario()">Cancelar</button>
     </form>
 }
 

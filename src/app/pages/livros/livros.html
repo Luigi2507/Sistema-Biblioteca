@@ -40,6 +40,8 @@
             name="quantidade" [(ngModel)]="novoLivro.quantidade">
         </div>
 
+        <button type="button" (click)="fecharFormulario()">Cancelar</button>
+        
         <button type="submit">
             @if (editandoLivro) {
                 Salvar alterações
@@ -48,7 +50,6 @@
             }
         </button>
 
-        <button type="button" (click)="fecharFormulario()">Cancelar</button>
     </form>
 }
 
