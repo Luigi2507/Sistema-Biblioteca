@@ -106,4 +106,17 @@ export class Emprestimos {
     this.formularioVisivel = true;
     this.editandoEmprestimo = true;
   }
+
+  //Pesquisa
+  termoPesquisa = '';
+
+  emprestimosFiltrados() {
+    const termo = this.termoPesquisa.toLowerCase().trim();
+    
+    return this.emprestimos.filter(emprestimo =>
+      emprestimo.livro.toLowerCase().includes(termo) ||
+      emprestimo.usuario.toLowerCase().includes(termo) ||
+      emprestimo.status.toLowerCase().includes(termo)
+    );
+  }
 }

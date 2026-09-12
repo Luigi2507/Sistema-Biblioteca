@@ -74,7 +74,7 @@
     </thead>
 
     <tbody>
-        @for (emprestimo of emprestimos; track emprestimo.id) {
+        @for (emprestimo of emprestimosFiltrados(); track emprestimo.id) {
             <tr>
                 <td>{{emprestimo.livro}}</td>
                 <td>{{emprestimo.usuario}}</td>
@@ -84,6 +84,10 @@
                 <td>
                     <button class="btn-editar" (click)="editarEmprestimo(emprestimo)">Editar</button>
                 </td>
+            </tr>
+        } @empty {
+            <tr>
+            <td colspan="6" class="nenhum-emprestimo">Nenhum empréstimo encontrado.</td>
             </tr>
         }
     </tbody>
