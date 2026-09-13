@@ -9,37 +9,53 @@
 </div>
 
 @if (formularioVisivel) {
-    <form (ngSubmit)="cadastrarEmprestimo()">
+    <form #formEmprestimo="ngForm" (ngSubmit)="cadastrarEmprestimo()">
         <div>
             <label for="livro">Livro</label>
-            <select id="livro" name="livro" [(ngModel)]="novoEmprestimo.livro">
+            <select id="livro" name="livro" [(ngModel)]="novoEmprestimo.livro" required>
                 <option value="">Selecione um livro...</option>
                 <option value="1984">1984</option>
                 <option value="O Hobbit">O Hobbit</option>
                 <option value="Cosmos">Cosmos</option>
             </select>
+            @if (formEmprestimo.controls['livro'].touched && formEmprestimo.controls['livro'].invalid) {
+                <small class="erro">Selecione um livro.</small>
+            }
         </div>
 
         <div>
             <label for="usuario">Usuário</label>
-            <select type="text" id="usuario" name="usuario" [(ngModel)]="novoEmprestimo.usuario">
+            <select type="text" id="usuario" name="usuario" [(ngModel)]="novoEmprestimo.usuario" required>
                 <option value="">Selecione um usuário...</option>
                 <option value="Luigi Favaro">Luigi Favaro</option>
                 <option value="Ana da Silva">Ana da Silva</option>
                 <option value="Carlos Santos">Carlos Santos</option>
             </select>
+            @if (formEmprestimo.controls['usuario'].touched && formEmprestimo.controls['usuario'].invalid) {
+                <small class="erro">Selecione um usuário.</small>
+            }
         </div>
 
         <div>
             <label for="dataEmprestimo">Data do Empréstimo</label>
             <input type="date" id="dataEmprestimo" name="dataEmprestimo" [(ngModel)]="novoEmprestimo.dataEmprestimo"
-            disabled="editandoEmprestimo">
+            [disabled]="editandoEmprestimo" required>
+            @if (formEmprestimo.controls['dataEmprestimo'].touched && formEmprestimo.controls['dataEmprestimo'].invalid) {
+                <small class="erro">A data de empréstimo é obrigatória.</small>
+            }
         </div>
 
         <div>
             <label for="dataDevolucao">Data da Devolução</label>
             <input type="date" id="dataDevolucao" name="dataDevolucao" [(ngModel)]="novoEmprestimo.dataDevolucao"
-            disabled="editandoEmprestimo">
+            [disabled]="editandoEmprestimo" [min]="novoEmprestimo.dataEmprestimo" required>
+            @if (formEmprestimo.controls['dataDevolucao'].touched && formEmprestimo.controls['dataDevolucao'].invalid) {
+                <small class="erro">A data da devolução é obrigatória.</small>
+            }
+
+            @if (verificarDataInvalida()) {
+                <small class="erro">A data de devolução não pode ser anterior à data de empréstimo.</small>
+            }
         </div>
 
         <div>
@@ -49,9 +65,12 @@
                 <option value="Atrasado">Atrasado</option>
                 <option value="Devolvido">Devolvido</option>
             </select>
+            @if (formEmprestimo.controls['status'].touched && formEmprestimo.controls['status'].invalid) {
+                <small class="erro">O status é obrigatório.</small>
+            }
         </div>
         <button type="button" (click)="fecharFormulario()">Cancelar</button>
-        <button type="submit">
+        <button type="submit" [disabled]="formEmprestimo.invalid || verificarDataInvalida()">
             @if (editandoEmprestimo) {
                 Salvar alterações
             } @else {

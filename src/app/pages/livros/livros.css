@@ -105,9 +105,20 @@ form input:focus {
   border-color: #2563eb;
 }
 
-form button {
+form button[type="submit"] {
   background-color: #2563eb;
   color: white;
+  font-weight: bold;
+}
+
+form button[type="submit"]:hover {
+  background-color: #1d4ed8;
+}
+
+form button[type="submit"]:disabled {
+  background-color: #cbd5e1;
+  color: #64748b;
+  cursor: not-allowed;
 }
 
 /* =========================
@@ -182,4 +193,15 @@ tbody tr:hover {
 
   color: #64748b;
   font-style: italic;
+}
+
+/* ========================
+    ERRO
+========================= */
+.erro {
+  display: block;
+  margin-top: 5px;
+
+  color: #dc2626;
+  font-size: 13px;
 }

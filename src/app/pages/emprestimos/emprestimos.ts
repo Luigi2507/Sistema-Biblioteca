@@ -89,6 +89,15 @@ export class Emprestimos {
     this.fecharFormulario();
   }
 
+  //Verificação de datas no cadastro
+  verificarDataInvalida(): boolean {
+    if (!this.novoEmprestimo.dataEmprestimo || !this.novoEmprestimo.dataDevolucao) {
+      return false;
+    }
+    
+    return (this.novoEmprestimo.dataEmprestimo > this.novoEmprestimo.dataDevolucao); //se a data de emprestimo for maior, retorna true (inválido)
+  }
+
   //Editar empréstimo
   editandoEmprestimo = false;
   emprestimoEditandoId: number | null = null;

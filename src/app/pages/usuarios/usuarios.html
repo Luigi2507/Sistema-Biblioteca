@@ -10,29 +10,44 @@
 </div>
 
 @if (formularioVisivel) {
-    <form (ngSubmit)="cadastrarUsuario()">
+    <form #formUsuario="ngForm" (ngSubmit)="cadastrarUsuario()">
 
         <div>
             <label for="nome">Nome</label>
             <input type="text" id="nome" name="nome"
-                [(ngModel)]="novoUsuario.nome">
+                [(ngModel)]="novoUsuario.nome" required>
+            @if (formUsuario.controls['nome'].touched && formUsuario.controls['nome'].invalid) {
+                <small class="erro">O nome é obrigatório.</small>
+            }
         </div>
 
         <div>
             <label for="email">Email</label>
             <input type="text" id="email" name="email"
-                [(ngModel)]="novoUsuario.email">
+                [(ngModel)]="novoUsuario.email" required>
+            @if (formUsuario.controls['email'].touched && formUsuario.controls['email'].invalid) {
+                @if (formUsuario.controls['email'].errors?.['required']) {
+                    <small class="erro">O e-mail é obrigatório.</small>
+                }
+
+                @if (formUsuario.controls['email'].errors?.['email']) {
+                    <small class="erro">Digite um e-mail válido.</small>
+                }
+            }
         </div>
 
         <div>
             <label for="telefone">Telefone</label>
             <input type="text" id="telefone" name="telefone"
-                [(ngModel)]="novoUsuario.telefone">
+                [(ngModel)]="novoUsuario.telefone" required>
+            @if (formUsuario.controls['telefone'].touched && formUsuario.controls['telefone'].invalid) {
+                <small class="erro">O telefone é obrigatório.</small>
+            }
         </div>
 
         <button type="button" (click)="fecharFormulario()">Cancelar</button>
         
-        <button type="submit">        
+        <button type="submit" [disabled]="formUsuario.invalid">        
             @if (editandoUsuario) {
                 Salvar alterações
             } @else {
